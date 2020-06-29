@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+			<!-- <?xml-stylesheet type="text/css" href="rss.css" ?> -->
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Miika's blog</title>
+		<description>This feed contains blogposts from Miika Nissi.</description>
+		<language>en-us</language>
+		<link>https://miikanissi.com/rss.xml</link>
+		<atom:link href="https://miikanissi.com/rss.xml" rel="self" type="application/rss+xml"/>
+		<image>
+			<title>Miika's blog</title>
+			<url>https://miikanissi.com/images/miika.png</url>
+			<link>https://miikanissi.com/rss.xml</link>
+		</image>
+
+			<!-- LB -->
+
+
+
+<item>
+	<title>Setting up my website</title>
+	<guid>https://miikanissi.com/blog/setting-up-my-website</guid>
+<pubDate>Mon, 29 Jun 2020 15:36:11 +0000</pubDate>
+<description><![CDATA[
+<p>After planning to make my own website for a good few months I finally got to making it live.</p>
+<p>If you're reading this post it means I have succeeded. I originally made a working template with login and blog features, fully  working with the <a href="https://www.djangoproject.com"/>Django Web Framework</a>. Despite it being a working template I decided to go with something way more simple. I'm a big fan of KISS principle and Django is a lot of "bloat". </p>
+<p>So I ended up with this website. I am running this on a virtual machine solely with Nginx. No complicated Databases, no PHP, no JavaScript, just a pure static html website.</p>
+<p>The benefits of running a static website are great loading times, less vulnerabilites and perhaps more control on every aspect of the website. I also just like the simplicity.</p>
+]]></description>
+</item>
+	</channel>
+	
+</rss>
