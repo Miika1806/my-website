@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Managing dotfiles with a Git repository</title>
+<link rel='stylesheet' type='text/css' href='../style.css'/>
+<meta charset='utf-8'/>
+<meta name='description' content='This website is for Miika Nissi'/>
+<meta name='viewport' content='width=device-width, initial-scale=1'/>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+<meta name='keywords' content='resume, CV, Miika Nissi, blog, blogpage'/>
+<meta name='author' content='Miika Nissi'/>
+<link rel='icon' type='image/png' href='images/favicon.png'/>
+</head>
+<body>
+<a href='https://miikanissi.com/blogindex'>Back</a>
+<h1>Managing dotfiles with a Git repository</h1>
+<p>It's very common for people to store their dotfiles for Linux systems on git/github, myself included. My dotfiles can be found <a href="https://github.com/miikanissi/dotfiles">here</a>. Especially if you change distros or computers often it is very useful. In this post I will show the steps to easily manage your dotfiles with git.</p>
+<p>First create an alias in your .bashrc <code>alias dotfiles="git --work-tree $HOME --git-dir $HOME/dotfiles"</code>.</p>
+<p>Then make a directory called dotfiles in your $HOME directory and initialize it with a bare git repo with a command <code>dotfiles init</code>.</p>
+<p>Now to add a remote origin for the repo you do <code>dotfiles remote add-t \* -f origin "url-of-your-repo"</code>.</p>
+<p>If your repository already had your dotfiles in it and you want to clone them on your machine you run the command <code>dotfiles checkout master</code>.<p>
+<p>That is all you need to do to setup your dotfiles for Git. If you need to add another file to be tracked you run the command <code>dotfiles add "filename"</code> and then push it on git normally. </p>
+<p>Another handy command to run to not show all untracked files in your $HOME directory (which is a lot), type in <code>dotfiles config --local status.showUntrackedFiles no</code>.
+<p>This is the setup I personally use to keep track of my dotfiles whenever I change distros or my hard drive breaks, which just happened actually.</p>
+<footer>by <strong><a href='https://miikanissi.com/'>Miika Nissi</a></strong></footer>
+</body>
+
+</html>

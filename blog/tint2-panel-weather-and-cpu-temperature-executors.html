@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Tint2 Panel Weather and CPU temperature executors</title>
+<link rel='stylesheet' type='text/css' href='../style.css'/>
+<meta charset='utf-8'/>
+<meta name='description' content='This website is for Miika Nissi'/>
+<meta name='viewport' content='width=device-width, initial-scale=1'/>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+<meta name='keywords' content='resume, CV, Miika Nissi, blog, blogpage'/>
+<meta name='author' content='Miika Nissi'/>
+<link rel='icon' type='image/png' href='images/favicon.png'/>
+</head>
+<body>
+<h1>Tint2 Panel Weather and CPU temperature executors</h1>
+<p>Recently I've been learning more about Openbox and Tint2 Panel, the customizations you can do are almost unlimited and utilizing bash scripts to add panel items as executors is a nice way to have useful information shown on the panel. In this small guide I will share my scripts to show CPU Temperature on your panel, which has a left click option to open htop. I will also add a weather panel item which shows the chance of rain, daily low & high temperature. </p>
+<h2>CPU Temperature monitor</h2>
+<p>The dependency you need is the package lm_sensors, which allows easy access to CPU temperature and other information</p>
+<h3>tint2rc</h3>
+<pre><code>
+#-------------------------------------
+# Executor 1
+execp = new
+execp_command = ~/.local/bin/tint2_cputemp.sh
+execp_interval = 30
+execp_has_icon = 0
+execp_cache_icon = 0
+execp_continuous = 0
+execp_markup = 0
+execp_tooltip = Open htop
+execp_lclick_command = urxvt -e "htop"
+execp_rclick_command =
+execp_mclick_command =
+execp_uwheel_command =
+execp_dwheel_command =
+execp_font = DejaVu Sans Bold Semi-Condensed 8
+execp_font_color = #ffffff 100
+execp_padding = 0 0
+execp_background_id = 8
+execp_centered = 1
+execp_icon_w = 0
+execp_icon_h = 0
+</code></pre>
+<h3>tint2_cputemp.sh</h3>
+<pre><code>
+#!/bin/bash
+
+temp=$(sensors | grep -i temp1 | head -n1 | sed -r 's/.*:\s+[\+-]?(.*C)\s+.*/\1/')
+rpm=$(sensors | grep -i fan | head -n1 | sed -r 's/.*?:\s+(.*?)\s+RPM/\1/')
+
+printf '%8s\n%8s ' "$temp" "$rpm/m"
+</code></pre>
+<h2>Weather monitor</h2>
+<p>This script gets the weather report from wttr.in using your location data.</p>
+<h3>tint2rc</h3>
+<pre><code>
+#-------------------------------------
+# Executor 2
+execp = new
+execp_command = ~/.local/bin/tint2_weather.sh
+execp_interval = 600
+execp_has_icon = 0
+execp_cache_icon = 0
+execp_continuous = 0
+execp_markup = 0
+execp_tooltip = Open weather report
+execp_lclick_command = urxvt -e less -Srf ~/.local/share/weatherreport
+execp_rclick_command =
+execp_mclick_command =
+execp_uwheel_command =
+execp_dwheel_command =
+execp_font = DejaVu Sans Bold Semi-Condensed 8
+execp_font_color = #ffffff 100
+execp_padding = 0 0
+execp_background_id = 8
+execp_centered = 1
+execp_icon_w = 0
+execp_icon_h = 0
+</code></pre>
+<h3>tint_weather.sh</h3>
+<pre><code>
+#!/bin/sh
+
+# If we have internet, get a weather report from wttr.in and store it locally.
+# You could set up a shell alias to view the full file in a pager in the
+# terminal if desired. 
+weatherreport="${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport"
+getforecast() { curl -sf "wttr.in/$LOCATION" > "$weatherreport" || exit 1 ;}
+
+# Updates the weatherreport every time script is ran, can be removed and made to only update when desired. 
+getforecast
+
+# Some very particular and terse stream manipulation. We get the maximum
+# precipication chance and the daily high and low from the downloaded file and
+firstline="$(sed '16q;d' "$weatherreport" |
+	grep -wo "[0-9]*%" | sort -rn | sed "s/^/Rain:/g;1q" | tr -d '\n')"
+
+secondline="$(sed '13q;d' "$weatherreport" | 
+    grep -o "m\\([-+]\\)*[0-9]\\+" | 
+    sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | 
+    awk '{print " Low:" $1 "°","High:" $2 "° "}')"
+
+echo "${firstline}"
+echo "${secondline}"
+</code></pre>
+<p> All of these scripts and configuration files can also be found on my <a href="https://github.com/Miika1806/dotfiles">GitHub dotfiles repository.</a></p>
+<footer>by <strong><a href='https://miikanissi.com/'>Miika Nissi</a></strong></footer>
+</body>
+
+</html>

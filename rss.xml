@@ -13,21 +13,386 @@
 			<link>https://miikanissi.com/rss.xml</link>
 		</image>
 
-			<!-- LB -->
+			<!-- BLOG -->
 
 
 
 <item>
-	<title>Setting up my website</title>
-	<guid>https://miikanissi.com/blog/setting-up-my-website</guid>
-<pubDate>Mon, 29 Jun 2020 15:36:11 +0000</pubDate>
+<title>Managing dotfiles with a Git repository</title>
+<guid>https://miikanissi.com/blog/managing-dotfiles-with-a-git-repository</guid>
+<pubDate>Tue, 20 Oct 2020 17:45:41 +0000</pubDate>
 <description><![CDATA[
-<p>After planning to make my own website for a good few months I finally got to making it live.</p>
-<p>If you're reading this post it means I have succeeded. I originally made a working template with login and blog features, fully  working with the <a href="https://www.djangoproject.com"/>Django Web Framework</a>. Despite it being a working template I decided to go with something way more simple. I'm a big fan of KISS principle and Django is a lot of "bloat". </p>
-<p>So I ended up with this website. I am running this on a virtual machine solely with Nginx. No complicated Databases, no PHP, no JavaScript, just a pure static html website.</p>
-<p>The benefits of running a static website are great loading times, less vulnerabilites and perhaps more control on every aspect of the website. I also just like the simplicity.</p>
+<p>It's very common for people to store their dotfiles for Linux systems on git/github, myself included. My dotfiles can be found <a href="https://github.com/miikanissi/dotfiles">here</a>. Especially if you change distros or computers often it is very useful. In this post I will show the steps to easily manage your dotfiles with git.</p>
+<p>First create an alias in your .bashrc <code>alias dotfiles="git --work-tree $HOME --git-dir $HOME/dotfiles"</code>.</p>
+<p>Then make a directory called dotfiles in your $HOME directory and initialize it with a bare git repo with a command <code>dotfiles init</code>.</p>
+<p>Now to add a remote origin for the repo you do <code>dotfiles remote add-t \* -f origin "url-of-your-repo"</code>.</p>
+<p>If your repository already had your dotfiles in it and you want to clone them on your machine you run the command <code>dotfiles checkout master</code>.<p>
+<p>That is all you need to do to setup your dotfiles for Git. If you need to add another file to be tracked you run the command <code>dotfiles add "filename"</code> and then push it on git normally. </p>
+<p>Another handy command to run to not show all untracked files in your $HOME directory (which is a lot), type in <code>dotfiles config --local status.showUntrackedFiles no</code>.
+<p>This is the setup I personally use to keep track of my dotfiles whenever I change distros or my hard drive breaks, which just happened actually.</p>
 ]]></description>
 </item>
+
+
+
+
+<item>
+<title>Vim and Ctags</title>
+<guid>https://miikanissi.com/blog/vim-and-ctags</guid>
+<pubDate>Thu, 17 Sep 2020 20:05:10 +0000</pubDate>
+<description><![CDATA[
+<p>Recently I decided to start learning vim more as I have previously used Emacs but notice myself using mostly the terminal and using vim on the terminal is much faster and convenient for small text editing. I found this <a href="https://www.youtube.com/watch?v=XA2WjJbmmoM">great speech from 2016</a>, where I learned about ctags. What ctags does is it creates tags so you can quickly jump to other instances of a certain word AND it also provides autocompletion. Here I will show basic steps to get it working.</p>
+<p>First install ctags from your package manager and to make creating tags simple add a command to your vimrc by adding this line: <code>command! MakeTags !ctags -R . </code>. Now when you are editing a file and you are in the root directory of your project you can run the command MakeTags inside vim and it automatically creates tags for everything recursively.</p>
+<p>Now we can:</p>                                                              
+<ul>                                                                            
+    <li>Use ^] to jump to tag under cursor</li>                                   
+    <li>Use ^] for ambigious tags</li>                                            
+    <li>Use ^t to jump back up the tag stack</li>                                 
+    <li>Use ^x^n to autocomplete from just that file</li>                         
+    <li>Use ^x^f to autocomplete for filenames(if path is correct)</li>           
+    <li>Use ^x^] to autocomplete for tags only</li>                               
+    <li>Use ^n to autocomplete for anything specified by the 'complete' option</li>
+    <li>Use ^n and ^p to go back and forth inside the suggestions list</li>       
+ </ul>                                                                           
+                                                                                 
+ <p>That's the most of it for ctags. For more configurations unrelated to ctags I recommend <a href="https://www.youtube.com/watch?v=Gs1VDYnS-Ac">this speech from Leeren</a>.</p>
+]]></description>
+</item>
+
+
+
+
+
+
+<item>
+<title>Moving from Debian to Fedora</title>
+<guid>https://miikanissi.com/blog/moving-from-debian-to-fedora</guid>
+<pubDate>Mon, 07 Sep 2020 20:59:37 +0000</pubDate>
+<description><![CDATA[
+<p>Few days ago my Debian pc froze as I made a mistake in my configurations and I had to do a forced shutdown. This ended up creating bad blocks in my boot partition and even after using fsck from the rescue shell I was unable to get my drive mounted. Maybe using a live image and mounting my drive that way would've fixed it, but this turned out to be a good excuse to install Fedora as my Linux distribution.</p>
+<p>I really like Debian, but lately I have noticed the old packages of Debian Stable getting in my way and I'm not comfortable using Testing or Unstable on Debian. I thought Fedora fills the middleground between stability and relatively new packages so I gave it a shot. So far I have no regrets, especially getting drivers to work was a breeze.</p>
+<p>As I always do I installed the most minimal version of Fedora 32 so I can cherrypick all of my packages on my system. Here is a list of all the packages I installed: </p>
+<pre><code>@base-x xorg-x11-drv-amdgpu libimobiledevice libimobiledevice-utils usbmuxd git \
+compton lightdm lightdm-gtk lightdm-slick-greeter bspwm sxhkd polybar vim xterm rxvt-unicode \
+firefox dunst mpd ncmpcpp curl pcmanfm pulseaudio pavucontrol zathura neofetch lm_sensors \
+gdouros-symbola-fonts fontawesome-fonts dejavu-sans-mono-fonts rofi feh sxiv network-manager-applet \
+wget emacs lxappearance tar mpv newsboat i3 maim xclip npm
+</code></pre>
+<p>The list is a little all over the place as I wrote it in order I installed everything, I'm sure I will keep installing more packages in the future but after the first few days this is all I've installed. The main Window Manager I like to use is BSPWM and I made a short blogpost about it <a href="https://miikanissi.com/blog/babbys-first-tiling-window-manager.html">here</a>. Also if you're interested in seeing my configuration files they can be found <a href="https://github.com/Miika1806/dotfiles">on my Github</a>.</p> 
+]]></description>
+</item>
+
+
+
+
+<item>
+<title>Babby's first Tiling Window Manager</title>
+<guid>https://miikanissi.com/blog/babbys-first-tiling-window-manager</guid>
+<pubDate>Mon, 31 Aug 2020 20:50:24 +0000</pubDate>
+<description><![CDATA[
+<p>I had some spare time recently and I decided to configure a tiling window manager setup, I had noticed myself constantly resizing and moving my windows around so I thought it was time to finally start using a tiling window manager instead. </p>
+<p>I have to say there are so many good ones out there it was very difficult to choose the right one for me, but I ended up going with BSPWM, which stands for ... no idea what it stands for. Regardless I liked the idea of modularity with it, BSPWM is simple just the window manager, it comes with no hotkeys, application launchers or navigation bars and it is up to the user to decide what they want to use for those. So in addition to BSPWM I also installed SXHKD, for hotkeys, Polybar for a task bar and Rofi for an application launcher. </p>
+<p>I spent quite a few hours customizing my hotkeys, taskbar, scripts and colors, in the end I went with Hopscotch color scheme and made some improvements to my weather script. Here is the end result of my desktop: </p>
+<img class="img_center" src="images/desktop_bspwm.jpg" alt="BSPWM desktop" style="max-width: 720px;">
+]]></description>
+</item>
+
+
+
+
+
+
+
+
+
+
+<item>
+<title>Importing pictures from iPhone to Linux PC</title>
+<guid>https://miikanissi.com/blog/importing-pictures-from-iphone-to-linux-pc</guid>
+<pubDate>Sun, 16 Aug 2020 21:17:51 +0000</pubDate>
+<description><![CDATA[
+<p>You'd think moving pictures from a so called "smart phone" to your computer would be a simple task in 2020, but that's not how Apple works.</p>
+<p>My first problem was getting access to iPhone's storage. After connecting it to my Linux pc I could only access the Documents folder. DCIM folder would fail to mount. After a bit of research I found out you need to install a package called <b>ifuse</b> to be able to mount iPhones, easiest way to do this with ifuse I found out to be mounting it directly in your home directory. The command for this is <code>ifuse ~/mountlocation</code>.</p>
+<p>Now that the iPhone is succesfully mounted you can go ahead and copy the images to your drive. After you're done with this you might realize most of your files have an extension .HEIC and most image viewers don't really support this format. This is another great idea Apple had to get rid of .JPEGs and use an obscure file format instead. Now if you want your pictures as classic .JPGs you need to convert them. The best way for this in my opinion is using <b>ImageMagick</b>. I made a small script to make this process very simple, just install imagemagick and run this bash script: </p>
+<pre><code>
+#!/bin/sh
+
+DIR=$1
+for file in $DIR/*.HEIC;
+    do
+        convert "${file}" -set filename:t '%d/%t-converted' '%[filename:t].j    pg'
+    done
+</code></pre>
+<p>You give this script the directory where your pictures are located and itconverts every .HEIC file into a .jpg. </p>
+]]></description>
+</item>
+
+
+<item>
+<title>Tint2 Panel Weather and CPU temperature executors</title>
+<guid>https://miikanissi.com/blog/tint2-panel-weather-and-cpu-temperature-executors</guid>
+<pubDate>Fri, 31 Jul 2020 16:45:07 +0000</pubDate>
+<description><![CDATA[
+<p>Recently I've been learning more about Openbox and Tint2 Panel, the customizations you can do are almost unlimited and utilizing bash scripts to add panel items as executors is a nice way to have useful information shown on the panel. In this small guide I will share my scripts to show CPU Temperature on your panel, which has a left click option to open htop. I will also add a weather panel item which shows the chance of rain, daily low & high temperature. </p>
+<h2>CPU Temperature monitor</h2>
+<p>The dependency you need is the package lm_sensors, which allows easy access to CPU temperature and other information</p>
+<h3>tint2rc</h3>
+<pre><code>
+#-------------------------------------
+# Executor 1
+execp = new
+execp_command = ~/.local/bin/tint2_cputemp.sh
+execp_interval = 30
+execp_has_icon = 0
+execp_cache_icon = 0
+execp_continuous = 0
+execp_markup = 0
+execp_tooltip = Open htop
+execp_lclick_command = urxvt -e "htop"
+execp_rclick_command =
+execp_mclick_command =
+execp_uwheel_command =
+execp_dwheel_command =
+execp_font = DejaVu Sans Bold Semi-Condensed 8
+execp_font_color = #ffffff 100
+execp_padding = 0 0
+execp_background_id = 8
+execp_centered = 1
+execp_icon_w = 0
+execp_icon_h = 0
+</code></pre>
+<h3>tint2_cputemp.sh</h3>
+<pre><code>
+#!/bin/bash
+
+temp=$(sensors | grep -i temp1 | head -n1 | sed -r 's/.*:\s+[\+-]?(.*C)\s+.*/\1/')
+rpm=$(sensors | grep -i fan | head -n1 | sed -r 's/.*?:\s+(.*?)\s+RPM/\1/')
+
+printf '%8s\n%8s ' "$temp" "$rpm/m"
+</code></pre>
+<h2>Weather monitor</h2>
+<p>This script gets the weather report from wttr.in using your location data.</p>
+<h3>tint2rc</h3>
+<pre><code>
+#-------------------------------------
+# Executor 2
+execp = new
+execp_command = ~/.local/bin/tint2_weather.sh
+execp_interval = 600
+execp_has_icon = 0
+execp_cache_icon = 0
+execp_continuous = 0
+execp_markup = 0
+execp_tooltip = Open weather report
+execp_lclick_command = urxvt -e less -Srf ~/.local/share/weatherreport
+execp_rclick_command =
+execp_mclick_command =
+execp_uwheel_command =
+execp_dwheel_command =
+execp_font = DejaVu Sans Bold Semi-Condensed 8
+execp_font_color = #ffffff 100
+execp_padding = 0 0
+execp_background_id = 8
+execp_centered = 1
+execp_icon_w = 0
+execp_icon_h = 0
+</code></pre>
+<h3>tint_weather.sh</h3>
+<pre><code>
+#!/bin/sh
+
+# If we have internet, get a weather report from wttr.in and store it locally.
+# You could set up a shell alias to view the full file in a pager in the
+# terminal if desired. 
+weatherreport="${XDG_DATA_HOME:-$HOME/.local/share}/weatherreport"
+getforecast() { curl -sf "wttr.in/$LOCATION" > "$weatherreport" || exit 1 ;}
+
+# Updates the weatherreport every time script is ran, can be removed and made to only update when desired. 
+getforecast
+
+# Some very particular and terse stream manipulation. We get the maximum
+# precipication chance and the daily high and low from the downloaded file and
+firstline="$(sed '16q;d' "$weatherreport" |
+	grep -wo "[0-9]*%" | sort -rn | sed "s/^/Rain:/g;1q" | tr -d '\n')"
+
+secondline="$(sed '13q;d' "$weatherreport" | 
+    grep -o "m\\([-+]\\)*[0-9]\\+" | 
+    sort -n -t 'm' -k 2n | sed -e 1b -e '$!d' | tr '\n|m' ' ' | 
+    awk '{print " Low:" $1 "°","High:" $2 "° "}')"
+
+echo "${firstline}"
+echo "${secondline}"
+</code></pre>
+<p> All of these scripts and configuration files can also be found on my <a href="https://github.com/Miika1806/dotfiles">GitHub dotfiles repository.</a></p>
+]]></description>
+</item>
+
+
+
+
+
+
+
+
+<item>
+<title>Week in the woods</title>
+<guid>https://miikanissi.com/blog/week-in-the-woods</guid>
+<pubDate>Sun, 26 Jul 2020 12:04:20 +0000</pubDate>
+<description><![CDATA[
+<div class="even">
+	<img src="images/cabin.jpg" alt="Cabin">
+	<br>
+	<p>My parents rented a cabin in the middle of Finland, the "Lake Finland", for a week for all of us to go there and relax for a bit. Here are some highlights of the trip. </p>
+	<p>The cabin itself was a super cozy wooden cabin with 2 floors and enough sleeping room for 5 people. It also had central air which is very uncommon for a cabin in the middle of the woods but I didn't complain. </p>
+	<p>The property also had a seperate wooden outdoors sauna. It was the best sauna I have ever been in. </p>
+</div>
+<div class="odd">
+	<img src="images/cabinstairs.jpg" alt="Stairs down the lake">
+	<br>
+	<p>Of course a cabin in Lake Finland wouldn't be complete without a lake and deck to fish and swim from. I didn't go for a swim as the weather was only mid 50s for the week, but I spent most of the time fishing.</p>
+	<p>The place was by no means a good fishing spot, the majority of catches were small perch that we just released back. But my highlight was catching a ~4 lb zander. </p>
+</div>
+<div class="even">
+	<img src="images/lake.jpg" alt="Lake near cabin">
+	<br>
+	<p>Our cat, Momo, had the time of his life, he caught 3 mice, 2 salamander and a frog. I think he really enjoyed how quiet it was at the cabin, there were no car sounds or anything. </p>
+	<p>I would love to buy my own cabin one day. I would really enjoy building and improving the cabin and just spending my summers there.. Maybe one day!</p>
+</div>
+]]></description>
+</item>
+
+
+
+
+<item>
+<title>Openbox Window Manager into full minimal Desktop Environment</title>
+<guid>https://miikanissi.com/blog/openbox-window-manager-into-full-minimal-desktop-environment</guid>
+<pubDate>Sun, 19 Jul 2020 19:56:45 +0000</pubDate>
+<description><![CDATA[
+<p>After using Xfce4 with a Debian stable install for around a year I decided I wanted something different. I've always been a fan of minimal Linux installs and customizing all aspects of your desktop from scratch so I finally went ahead and gave it a go myself. I saw no reason to change away from Debian Stable as "it just werks", but I wanted to build a Desktop Environment from the bottom up. For this I chose <a href="http://openbox.org/wiki/Main_Page">Openbox</a> Window Manager and started to piece the rest of the desktop around it following the UNIX philosophy. Here's a rough outline on what I did:</p>
+<p>First thing I did after booting into a fully barebones Debian install with just the System Utilities installed is I modified the <code>/etc/apt/sources.list</code> file to add contrib non-free packages which are necessary for this setup.</p>
+<p>After updating the apt repositories it was time to install most packages I needed. I will only install the basic components of making a desktop environment. Later I will get extra programs such as music player, email, games etc. This is only what I chose and customization is possible (that's the point).</p>
+<pre>
+<code>
+$ sudo apt install openbox obconf onmenu menu \
+    xorg xbindkeys lxappearance tint2 xwallpaper \
+    pcmanfm compton firmware-linux pavucontrol \
+    ssh git rxvt-unicode firefox-esr vim vim-gtk \
+    lightdm ipheth-utils scrot sxiv clipit \
+    curl volumeicon-alsa xarchiver qt5-style-plugins \
+    network-manager network-manager-gnome dunst \
+    dbus-x11 libnotify-bin
+</code>
+</pre>
+<h3>Config</h3>
+<p>After rebooting you should be greeted by lightdm login screen. Log in and you're in an out-of-box Openbox session. It's time to start configuring now.</p>
+<p>All of my dotfiles can be found <a href="https://github.com/Miika1806/dotfiles">here</a>. I won't go much into detail how to make these configurations, but I will explain where you do them.</p>
+<p>Openbox configuration files are located in <code>~/.config/openbox/</code>. The main files you will be modifying are <code>autostart</code>, <code>rc.xml</code> and <code>menu.xml</code>. </p>
+<p>In <code>autostart</code> you want to put all the programs and scripts you want to run on startup such as tint2 panel, xwallpaper, xbindkeys etc.</p>
+<p>In <code>rc.xml</code> you will put all of your configurations on appearance and keybinds. To change these you can use <code>obconf</code>.</p>
+<p>In <code>menu.xml</code> you define what programs and actions your right click menu contains. </p>
+<p>That's the short and sweet of Openbox. We also want to modify Tint 2 panel. The configurations are located in <code>~/.config/tint2/tint2rc</code>.</p>
+<p>Our notification manager dunst has a configuration file in <code>~/.config/dunst/dunstrc</code>.</p>
+<p>Lastly we don't want to forget about the <code>.bashrc</code> and <code>.Xresources</code> files. These contain color and terminal emulator configurations.</p>
+<p>That is really all you need to configure Openbox with a Tint2 Panel. Choosing a Window Manager without a Desktop Environment might seem intimidating but all you have to do is manually choose and install your favorite programs for a personal Desktop Environment. </p>
+]]></description>
+</item>
+
+
+
+
+
+
+<item>
+<title>How to set up a personal GIT Server</title>
+<guid>https://miikanissi.com/blog/how-to-set-up-a-personal-git-server</guid>
+<pubDate>Thu, 16 Jul 2020 12:05:38 +0000</pubDate>
+<description><![CDATA[
+<p>I thought I could use my blog to give simple How-To tutorials whenever I figure out something useful that doesn't have too many resources available online. </p><p>In this blog I will explain how you can set up your own personal git server that can run on any VPS. I will also show how you can push changes to multiple repositories so you can easily have your code on GitHub and your own server without any extra effort.</p>
+<p>Firstly the requirements. You need a VPS or a local server that has git and ssh enabled.</p>
+<p>To start login to your server as root and create a <code>git</code> user and a <code>.ssh</code> directory for that user.</p>
+<pre><code class="language-console" data-lang="console">$ sudo adduser git $ su git $ cd $ mkdir .ssh && chmod 700 .ssh $ touch .ssh/authorized_keys && chmod 600 .ssh/authorized_keys</code></pre>
+<p>Now you need to add your public ssh key from your local machine to git users <code>.ssh/authorized_keys</code> file.</p>
+<p>This depends on your machine but commonly on linux systems your public key can be found at <code>/user/home/.ssh/id_rsa.pub</code>. Copy the contents of the file in it's entirity to your servers <code>authorized_keys</code> file that we just created.</p>
+<p>You should be able to login to your server now as a git user from your local machine using <code>ssh git@youraddress</code></p>
+<p>Now you can create a git directory on your server on any location you prefer, but I like to have mine at <code>/var/www/git/</code>.</p>
+<pre><code>$ cd $ sudo mkdir /var/www/git/ $ sudo chown git:git /var/www/git/</pre></code>
+<p>We have now created the git folder and we can start creating our repositories. To do that all we have to do is make a new directory inside the git folder as a git user and initialize a bare git repository there.</p>
+<pre><code>$ cd /var/www/git/ $ mkdir repository.git $ cd repository.git $ git init --bare </code></pre>
+<p>Now we have done everything we need on the server side. To push changes to this repository in your server you have to add a new 'pushurl' for your git direcotry on your machine.</p><p>On your local machine go to your git repository and run this: </p>
+<pre><code>$ git remote set-url --pushurl -add origin "git@youraddress:/var/www/git/repository.git $ git push --all</pre></code>
+<p>Your code should now have pushed to your personal git server. If you still want your commits to push to GitHub or GitLab as well all you have to do is run the previous command with the GitHub address as well. That should allow you to push to as many repositories as you want whenever you run a push command.</p>
+<p>To add more repositories just follow the same process of making a new directory inside the git folder and initializing it with a bare repository, then adding a new pushurl to your repository and pushing all changes there.</p>
+<p>You should now have a fully working personal Git server. In part 2 I will show how to have a nice public interface for your Git repositories on your website, I just have to figure it out first myself.</p>
+]]></description>
+</item>
+
+
+<item>
+<title>New pc</title>
+<guid>https://miikanissi.com/blog/new-pc</guid>
+<pubDate>Thu, 09 Jul 2020 19:25:37 +0000</pubDate>
+<description><![CDATA[
+<div class="even">
+	<img src="images/pc-jpg" alt="new pc">
+	<p>I received the parts for my new pc and put it together, the case is super small in person, perfect for my needs as I need to carry it in a plane often. </p>
+	<p>I had a lot of fun putting this together and it was very easy actually, the case designs have come a long way from just a few years back.</p>
+	<p>Here's a rough list of all the parts: </p>
+	<ul>
+		<li>Ryzen 5 3600</li>
+		<li>Radeon RX570</li>
+		<li>16gb DDR4 RAM</li>
+		<li>ASRock B450 Mini-ITX</li>
+		<li>Kingston 1tb A2000 NVMe</li>
+		<li>Corsair SF450</li>
+		<li>Kolink Rocket case</li>
+	</ul>
+	<p>Don't really have much more to say, this pc should be good for a good 5 years at least as I don't play too heavy games.</p>
+</div>
+<div class="odd">
+	<img src="images/desktop.jpg">
+	<p>I also installed Debian 10 on this machine again, it works like a charm.</p>
+	<p>And as usual I spent the whole day finding the perfect color schemes, themes and wallpapers, the most important part!</p>
+	<p>Only thing I'm missing in my setup is a good decentralized open source messaging platform, there isn't many good ones on the market.</p>
+</div>
+]]></description>
+</item>
+
+
+
+
+<item>
+<title>Debian Spring(summer) Cleaning</title>
+<guid>https://miikanissi.com/blog/debian-springsummer-cleaning</guid>
+<pubDate>Thu, 02 Jul 2020 14:25:25 +0000</pubDate>
+<description><![CDATA[
+<p>For the past few days or so I have been cleaning my desktop and organizing all of my dotfiles etc. I'm currently running Debian 10 buster with xfce DE. </p>
+<p>The reason I'm doing this cleaning and organizing on my desktop is because I went ahead and threw out some cash for a new computer. I will make a blog post about that later when I get all the parts assembled. I am very excited for it and I think I will go ahead and do a rather minimal Debain/xfce install on it as well. </p>
+<p>That's all from me today, just getting things ready for the new build.</p>
+]]></description>
+</item>
+
+
+
+
+<item>
+<title>Launching my website</title>
+<guid>https://miikanissi.com/blog/launching-my-website</guid>
+<pubDate>Mon, 29 Jun 2020 19:27:44 +0000</pubDate>
+<description><![CDATA[
+<p>After planning to make my own website for a good few months I finally managed to release it.</p>
+<p>If you're reading this post it means I have succeeded. I originally made a working template with login and blog features, fully  working with the <a href="https://www.djangoproject.com"/>Django Web Framework</a>. Despite it being a working template I decided to go with something way more simple. I'm a big fan of the KISS principle and Django is a very heavy duty framework. Not saying it wouldn't work for a small blog site, but there is also not much need for it. At least I got some practice in with Django :). </p>
+<p>Now how does my website work then?</p>
+<p>I am running this site on a virtual machine solely with Nginx. No complicated Databases, no PHP, no JavaScript, just a pure static html website.</p>
+<p>In order to make blog posts and update my <a href="https://miikanissi.com/rss.xml">RSS feed.</a> I found a very helpful script by <a href="https://github.com/LukeSmithxyz/lb">Luke Smith</a>. I modified his script slightly to fit my needs, but I have to give full credit to him.</p>
+<p>The benefits of running a static website are great loading times, less vulnerabilites and perhaps more control on every aspect of the website. I also just like the simplicity.</p>
+<p>If you want to see the source code for my website I have it on my <a href="https://github.com/Miika1806/my-website">Github</a>.</p>
+]]></description>
+</item>
+
+
+
+
 	</channel>
 	
 </rss>

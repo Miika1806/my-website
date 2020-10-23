@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Openbox Window Manager into full minimal Desktop Environment</title>
+<link rel='stylesheet' type='text/css' href='../style.css'/>
+<meta charset='utf-8'/>
+<meta name='description' content='This website is for Miika Nissi'/>
+<meta name='viewport' content='width=device-width, initial-scale=1'/>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+<meta name='keywords' content='resume, CV, Miika Nissi, blog, blogpage'/>
+<meta name='author' content='Miika Nissi'/>
+<link rel='icon' type='image/png' href='images/favicon.png'/>
+</head>
+<body>
+<a href='https://miikanissi.com/blogindex'>Back</a>
+<h1>Openbox Window Manager into full minimal Desktop Environment</h1>
+<p>After using Xfce4 with a Debian stable install for around a year I decided I wanted something different. I've always been a fan of minimal Linux installs and customizing all aspects of your desktop from scratch so I finally went ahead and gave it a go myself. I saw no reason to change away from Debian Stable as "it just werks", but I wanted to build a Desktop Environment from the bottom up. For this I chose <a href="http://openbox.org/wiki/Main_Page">Openbox</a> Window Manager and started to piece the rest of the desktop around it following the UNIX philosophy. Here's a rough outline on what I did:</p>
+<p>First thing I did after booting into a fully barebones Debian install with just the System Utilities installed is I modified the <code>/etc/apt/sources.list</code> file to add contrib non-free packages which are necessary for this setup.</p>
+<p>After updating the apt repositories it was time to install most packages I needed. I will only install the basic components of making a desktop environment. Later I will get extra programs such as music player, email, games etc. This is only what I chose and customization is possible (that's the point).</p>
+<pre>
+<code>$ sudo apt install openbox obconf obmenu menu \
+    xorg xbindkeys lxappearance tint2 xwallpaper \
+    pcmanfm compton firmware-linux pavucontrol \
+    ssh git rxvt-unicode firefox-esr vim vim-gtk \
+    lightdm light-locker ipheth-utils scrot sxiv clipit \
+    curl volumeicon-alsa xarchiver qt5-style-plugins \
+    network-manager network-manager-gnome dunst \
+    dbus-x11 libnotify-bin zathura
+</code>
+</pre>
+<h3>Config</h3>
+<p>After rebooting you should be greeted by lightdm login screen. Log in and you're in an out-of-box Openbox session. It's time to start configuring now.</p>
+<p>All of my dotfiles can be found <a href="https://github.com/miikanissi/dotfiles-old">here</a>. I won't go much into detail how to make these configurations, but I will explain where you do them.</p>
+<p>Openbox configuration files are located in <code>~/.config/openbox/</code>. The main files you will be modifying are <code>autostart</code>, <code>rc.xml</code> and <code>menu.xml</code>. </p>
+<p>In <code>autostart</code> you want to put all the programs and scripts you want to run on startup such as tint2 panel, xwallpaper, xbindkeys etc.</p>
+<p>In <code>rc.xml</code> you will put all of your configurations on appearance and keybinds. To change these you can use <code>obconf</code>.</p>
+<p>In <code>menu.xml</code> you define what programs and actions your right click menu contains. </p>
+<p>That's the short and sweet of Openbox. We also want to modify Tint 2 panel. The configurations are located in <code>~/.config/tint2/tint2rc</code>.</p>
+<p>Our notification manager dunst has a configuration file in <code>~/.config/dunst/dunstrc</code>.</p>
+<p>Lastly we don't want to forget about the <code>.bashrc</code> and <code>.Xresources</code> files. These contain color and terminal emulator configurations.</p>
+<p>That is really all you need to configure Openbox with a Tint2 Panel. Choosing a Window Manager without a Desktop Environment might seem intimidating but all you have to do is manually choose and install your favorite programs for a personal Desktop Environment. </p>
+<footer>by <strong><a href='https://miikanissi.com/'>Miika Nissi</a></strong></footer>
+</body>
+
+</html>

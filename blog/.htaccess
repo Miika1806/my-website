@@ -1,2 +1,12 @@
 
-AddDescription "Setting up my website" "setting-up-my-website.html" #Mon, 29 Jun 2020 15:36:11 +0000
+AddDescription "Launching my website" "launching-my-website.html" #Mon, 29 Jun 2020 19:27:44 +0000
+AddDescription "Debian Spring(summer) Cleaning" "debian-springsummer-cleaning.html" #Thu, 02 Jul 2020 14:25:25 +0000
+AddDescription "How to set up a personal GIT Server" "how-to-set-up-a-personal-git-server.html" #Thu, 16 Jul 2020 12:05:38 +0000
+AddDescription "Openbox Window Manager into full minimal Desktop Environment" "openbox-window-manager-into-full-minimal-desktop-environment.html" #Sun, 19 Jul 2020 19:56:45 +0000
+AddDescription "Week in the woods" "week-in-the-woods.html" #Sun, 26 Jul 2020 12:04:20 +0000
+AddDescription "Tint2 Panel Weather and CPU temperature executors" "tint2-panel-weather-and-cpu-temperature-executors.html" #Fri, 31 Jul 2020 16:45:07 +0000
+AddDescription "Importing pictures from iPhone to Linux PC" "importing-pictures-from-iphone-to-linux-pc.html" #Sun, 16 Aug 2020 21:17:51 +0000
+AddDescription "Babby's first Tiling Window Manager" "babbys-first-tiling-window-manager.html" #Mon, 31 Aug 2020 20:50:24 +0000
+AddDescription "Moving from Debian to Fedora" "moving-from-debian-to-fedora.html" #Mon, 07 Sep 2020 20:59:37 +0000
+AddDescription "Vim and Ctags" "vim-and-ctags.html" #Thu, 17 Sep 2020 20:05:10 +0000
+AddDescription "Managing dotfiles with a Git repository" "managing-dotfiles-with-a-git-repository.html" #Tue, 20 Oct 2020 17:45:41 +0000

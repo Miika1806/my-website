@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Moving from Debian to Fedora</title>
+<link rel='stylesheet' type='text/css' href='../style.css'/>
+<meta charset='utf-8'/>
+<meta name='description' content='This website is for Miika Nissi'/>
+<meta name='viewport' content='width=device-width, initial-scale=1'/>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+<meta name='keywords' content='resume, CV, Miika Nissi, blog, blogpage'/>
+<meta name='author' content='Miika Nissi'/>
+<link rel='icon' type='image/png' href='images/favicon.png'/>
+</head>
+<body>
+<a href='https://miikanissi.com/blogindex'>Back</a>
+<h1>Moving from Debian to Fedora</h1>
+<p>Few days ago my Debian pc froze as I made a mistake in my configurations and I had to do a forced shutdown. This ended up creating bad blocks in my boot partition and even after using fsck from the rescue shell I was unable to get my drive mounted. Maybe using a live image and mounting my drive that way would've fixed it, but this turned out to be a good excuse to install Fedora as my Linux distribution.</p>
+<p>I really like Debian, but lately I have noticed the old packages of Debian Stable getting in my way and I'm not comfortable using Testing or Unstable on Debian. I thought Fedora fills the middleground between stability and relatively new packages so I gave it a shot. So far I have no regrets, especially getting drivers to work was a breeze.</p>
+<p>As I always do I installed the most minimal version of Fedora 32 so I can cherrypick all of my packages on my system. Here is a list of all the packages I installed: </p>
+<pre><code>@base-x xorg-x11-drv-amdgpu libimobiledevice libimobiledevice-utils usbmuxd git compton\
+lightdm lightdm-gtk lightdm-slick-greeter bspwm sxhkd polybar vim vimx xterm rxvt-unicode \
+firefox dunst mpd ncmpcpp curl pcmanfm pulseaudio pavucontrol zathura neofetch lm_sensors \
+gdouros-symbola-fonts fontawesome-fonts dejavu-sans-mono-fonts rofi feh sxiv network-manager-applet \
+wget emacs lxappearance tar mpv newsboat i3 maim xclip npm 
+</code></pre>
+<p>The list is a little all over the place as I wrote it in order I installed everything, I'm sure I will keep installing more packages in the future but after the first few days this is all I've installed. The main Window Manager I like to use is BSPWM and I made a short blogpost about it <a href="https://miikanissi.com/blog/babbys-first-tiling-window-manager.html">here</a>. Also if you're interested in seeing my configuration files they can be found <a href="https://github.com/Miika1806/dotfiles">on my Github</a>.</p> 
+<footer>by <strong><a href='https://miikanissi.com/'>Miika Nissi</a></strong></footer>
+</body>
+
+</html>

@@ -41,11 +41,11 @@ publish() { \
 	webdate="$(date '+%a, %d %b %Y %H:%M:%S %z')" # But this visible date you can set to any format.
 	tmpdir=$(mktemp -d)
 
-	printf "<!DOCTYPE html>\\n<html lang=\"en\">\\n<head>\\n<title>%s</title>\\n<link rel='stylesheet' type='text/css' href='%s'>\\n<meta charset='utf-8'/>\\n</head>\\n<body>\\n<h1>%s</h1>\\n%s\\n<footer>by <strong><a href='%s'>%s</a></strong></footer>\\n</body>\\n\\n</html>" "$realname" "$css" "$basefile" "$(cat "$webdir/blog/.drafts/$basefile")" "$website" "$name" > "$webdir/blog/$basefile"
+	printf "<!DOCTYPE html>\\n<html lang=\"en\">\\n<head>\\n<title>%s</title>\\n<link rel='stylesheet' type='text/css' href='%s'/>\\n<meta charset='utf-8'/>\\n<meta name='description' content='This website is for Miika Nissi'/>\\n<meta name='viewport' content='width=device-width, initial-scale=1'/>\\n<meta http-equiv='X-UA-Compatible' content='IE=edge'/>\\n<meta name='keywords' content='resume, CV, Miika Nissi, blog, blogpage'/>\\n<meta name='author' content='Miika Nissi'/>\\n<link rel='icon' type='image/png' href='images/favicon.png'/>\\n</head>\\n<body>\\n<a href='https://miikanissi.com/blogindex'>Back</a>\\n<h1>%s</h1>\\n%s\\n<footer>by <strong><a href='%s'>%s</a></strong></footer>\\n</body>\\n\\n</html>" "$realname" "$css" "$realname" "$(cat "$webdir/blog/.drafts/$basefile")" "$website" "$name" > "$webdir/blog/$basefile"
 	printf "\\n<item>\\n<title>%s</title>\\n<guid>%sblog/%s</guid>\\n<pubDate>%s</pubDate>\\n<description><![CDATA[\\n%s\\n]]></description>\\n</item>\\n\\n" "$realname" "$website" "$base" "$rssdate" "$(cat "$webdir/blog/.drafts/$basefile")" >  "$tmpdir/rss"
 	printf "<li>%s &ndash; <a href=\"blog/%s\">%s</a></li>\\n" "$(date '+%Y %b %d')" "$basefile" "$realname" > "$tmpdir/index"
-	sed -i "/<!-- LB -->/r $tmpdir/rss" "$rssfile"
-	sed -i "/<!-- LB -->/r $tmpdir/index" "$indexfile"
+	sed -i "/<!-- BLOG -->/r $tmpdir/rss" "$rssfile"
+	sed -i "/<!-- BLOG -->/r $tmpdir/index" "$indexfile"
 	sed -i "/ \"$base.html\"/d" "$webdir/blog/.htaccess"
 	echo "AddDescription \"$realname\" \"$basefile\" #$rssdate" >> "$webdir/blog/.htaccess"
 	rm -f "$webdir/blog/.drafts/$chosen"
@@ -69,5 +69,5 @@ case "$1" in
 	t*) listandReturn "$webdir"/blog/.drafts/ trash && confirm trash && rm -f "$webdir/blog/.drafts/$chosen" && sed -i "/ \"$base.html\"/d" "$webdir/blog/.htaccess" ; printf "Draft deleted.\\n" ;;
 	d*) listandReturn "$webdir"/blog/ delete && confirm delete && delete && sed -i "/ \"$base.html\"/d" "$webdir/blog/.htaccess" ;;
 	r*) listandReturn "$webdir"/blog/ revise && revise ;;
-	*) printf "lb blog system by Luke Smith <luke@lukesmith.xyz>\\nUsage:\\n  lb n:\\tnew draft\\n  lb e:\\tedit draft\\n  lb p:\\tpublish/finalize draft\\n  lb r:\\trevise published entry\\n  lb t:\\tdiscard draft\\n  lb d:\\tdelete published entry\\n\\nBe sure to have the following pattern added to your RSS feed, blog file and blog index:\\n\\n<!-- LB -->\\n\\nNew content will be added directly below that sequence. This is required.\\nSee https://github.com/LukeSmithxyz/lb for more.\\n" ;;
+	*) printf "modified blog system by Luke Smith <luke@lukesmith.xyz>\\nUsage:\\n  blogi n:\\tnew draft\\n  blogi e:\\tedit draft\\n  blogi p:\\tpublish/finalize draft\\n  blogi r:\\trevise published entry\\n  blogi t:\\tdiscard draft\\n  blogi d:\\tdelete published entry\\n\\nBe sure to have the following pattern added to your RSS feed, blog file and blog index:\\n\\n<!-- BLOG -->\\n\\nNew content will be added directly below that sequence. This is required.\\n" ;;
 esac

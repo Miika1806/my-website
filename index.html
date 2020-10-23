@@ -1,60 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Miika Nissi</title>
-		<meta charset="utf-8">
-		<meta name="description" content="This website is for Miika Nissi">
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="keywords" content="resume, CV, Miika Nissi, homepage">
-		<meta name="author" content="Miika Nissi">
+  <head>
+    <title>Miika Nissi's Homepage</title>
+    <meta charset="utf-8">
+    <meta name="description" content="This website is for Miika Nissi">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="resume, CV, Miika Nissi, homepage, miikanissi, blog">
+    <meta name="author" content="Miika Nissi">
 
-		<link rel="stylesheet" type="text/css" href="style.css">
-	</head>
-	<body>
-		<h1><big>Miika Nissi</big> <small>(https://miikanissi.com)</small></h1>
-		<div id="links">
-			<div id="link">
-				software:
-				<a href="https://github.com/Miika1806"><img src="images/github.svg" alt="Github"></a>
-				<a href="https://linkedin.com/in/miika-nissi-1806"><img src="images/linkedin.svg" alt="LinkedIn"></a>
-			</div>
-			<div id="link">
-				personal:
-				<a href="https://miikanissi.com">website</a>
-				<a href="https://miikanissi.com/blogindex">blog</a>
-				<a href="rss.xml">rss</a>
-			</div>
-		</div>
-		<div class="odd">
-			<img src="images/miika.png" alt="Miika">
-			<h2>I'm Miika Nissi.</h2>
-			<p>I am currently studying Information and communications technology at HAMK UAS, Finland.</p>
-			<p>I'm originally from Nurmijärvi, Finland. I jump between New York & Finland on a regular basis.</p>
-			<p>I've been interested in technology for a long time and I love learning more every day. I'm especially interested in open source software and I enjoy tinkering with Linux.</p>
-		</div>
-		<div class="even">
-			<img src="images/deadlift.png" alt="Deadlift">
-			<h2>Here's a little bit about my hobbies.</h2>
-			<p>I spent a lot of my childhood playing soccer, but nowadays I mainly focus on lifting weights. I enjoy the constant process of learning and improving in weightlifting and that mindset carries over to all aspects of my life.</p>
-			<p>I also spend my free time playing video games, especially older games I grew up playing such as, Old School Runescape & Pokemon.</p>
-			<p>Finally I of course enjoy programming on my free time and tinkering with software. Here are some projects I've done: </p>
-		</div>
-		<div class="odd">
-			<img src="images/django.png" alt="Django">
-			<h2>Text based web adventure game using Django/MySQL/JS</h2>
-			<p>I got introduced to Django web framework in school and made a small project with it. It is an adventure game with MySQL database delivering you scenes based on your choices in the game. This was my first introduction to databases as well and I learnt a lot from it. In the future I'm hoping to learn more about delivering content to a web page using AJAX.</p>
-			<p>You can see the source code <a href="https://github.com/Miika1806/django-adventure-game">here.</a>
-		</div>
-		<div class="even">
-			<img src="images/shinyhunter.png" alt="Shinyhunter GUI">
-			<h2>GUI app for shiny hunting in Pokemon</h2>
-			<p>This project was a fun little GUI project after my first Java course. I learnt how to write GUIs in Java and to use an API for getting data for Pokemon objects.</p>
-		</div>
-		
-		<center>
-			<big>Contact me at <a href="mailto:miika@miikanissi.com">miika@miikanissi.com</a>!</big>
-		</center>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="alternate" type="application/rss+xml" href="rss.xml" title="Miika's Blog">
+    <link rel="icon" type="image/png" href="images/favicon.png"/>
+  </head>
+  <body>
+    <h1>Miika Nissi <small>(https://miikanissi.com)</small></h1>
+    <nav>
+      <ul>
+        <li><a href="https://miikanissi.com">Home</a></li>
+        <li><a class="dropdown" href="#">Software</a>
+          <ul>
+            <li><a href="https://github.com/miikanissi">Github</a></li>
+            <li><a href="https://leetcode.com/miikanissi/">Leetcode</a></li>
+          </ul>
+        </li>
+        <li><a class="dropdown" href="#">Blog</a>
+            <ul>      
+              <li><a href="https://miikanissi.com/blogindex">Blog</a></li>
+              <li><a href="https://miikanissi.com/rss.xml">RSS</a></li>
+            </ul>
+        </li>
+        <!-- <li><a href="https://miikanissi.com/portfolio">Portfolio</a></li> -->
+        <li><a class="dropdown" href="#">Contact</a>
+          <ul>
+            <li><a href="mailto:miika@miikanissi.com">Email</a></li>
+            <li><a href="https://linkedin.com/in/miika-nissi-1806">LinkedIn</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+    <div class="odd">
+      <img src="images/miika.jpg" alt="Miika">
+      <h2>I'm Miika Nissi.</h2>
+      <p>I am currently studying Information and Communication Technology at HAMK UAS, Finland.</p>
+      <p>I am originally from Nurmijärvi, Finland. Currently I live in Riihimäki, Finland.</p>
+      <p>I have been interested in technology for a long time and I enjoy learning more every day. I am especially interested in programming, open source software and I love tinkering with Linux.</p>
+            <p>I like to write small <a href="https://miikanissi.com/blogindex">blog posts</a> as guides to certain Linux tools that I'm familiar with and whatever other topics I find interesting.</p>
+    </div>
+    <div class="even">
+      <img src="images/deadlift.jpg" alt="Deadlift">
+      <h2>Here's a little bit about my hobbies.</h2>
+      <p>I spent a lot of my childhood playing soccer, but nowadays I mainly focus on lifting weights. I enjoy the constant process of learning and improving in weight lifting and that mindset carries over to all aspects of my life.</p>
+      <p>I sometimes play video games, especially older games I grew up playing such as PlayStation 2 & 3 games, Old School Runescape and Pokemon. </p>
+      <p>Finally I of course enjoy programming on my free time. Here are some projects I have done, both in school and on my own time: </p>
+    </div>
+    <div class="odd">
+      <img src="images/nginx.jpg" alt="Nginx">
+      <h2>I made my own website, you're looking at it.</h2>
+      <p>I made my first blogpost to describe how my website functions, you can read it <a href="https://miikanissi.com/blog/launching-my-website">here</a>.</p>
+      <p> To give a short summary I tried having a very minimal website which loads quickly and uses no JavaScript or other unnecessary features. I am very familiar with Django Web Framework and have done other websites with it (<a href="https://django.miikanissi.com">such as this text based game using MySQL</a>), but as a personal site I prefer a basic design. This website simply runs on nginx and serves static content for users. I write my blog posts using a helpful script to automatically create static HTML pages as well as an RSS feed.</p>
+    <p>It was especially important for me to have an RSS feed as I wish more websites still offered that option.</p>
+    </div>
+    <div class="even">
+      <img src="images/django.jpg" alt="Django">
+      <h2>Text based web adventure game using Django/MySQL/JS</h2>
+      <p>I got introduced to Django web framework in school and made a small project with it. It is an adventure game with MySQL database delivering you scenes based on your choices in the game. This was my first introduction to databases as well and I learnt a lot from it. In the future I'm hoping to learn more about delivering content to a web page using AJAX.</p>
+      <p>You can see the source code <a href="https://github.com/miikanissi/django-adventure-game">here</a>.</p>
+      <p>I also have a <a href="https://django.miikanissi.com">Live Demo</a> of my game so you can try it out!</p>
+    </div>
+    <div class="odd">
+      <img src="images/shinyhunter.png" alt="Shinyhunter GUI">
+      <h2>GUI app for shiny hunting in Pokemon</h2>
+      <p>This project was a fun little GUI project after my first Java course. I learnt how to write GUIs in Java and to use RESTful API for getting data for Pokemon objects. The purpose of the program is to keep track of shiny hunts in Pokemon, something which I like to do occasionally.</p>
+            <p>The source code is available on my <a href="https://github.com/miikanissi/Shiny-Pokes">GitHub</a>.</p>
+    </div>
+    
+    <footer>
+      Contact me at <a href="mailto:miika@miikanissi.com">miika@miikanissi.com</a>!
+    </footer>
 
-	</body>
+  </body>
 </html>

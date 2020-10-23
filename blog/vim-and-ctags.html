@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Vim and Ctags</title>
+<link rel='stylesheet' type='text/css' href='../style.css'/>
+<meta charset='utf-8'/>
+<meta name='description' content='This website is for Miika Nissi'/>
+<meta name='viewport' content='width=device-width, initial-scale=1'/>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+<meta name='keywords' content='resume, CV, Miika Nissi, blog, blogpage'/>
+<meta name='author' content='Miika Nissi'/>
+<link rel='icon' type='image/png' href='images/favicon.png'/>
+</head>
+<body>
+<a href='https://miikanissi.com/blogindex'>Back</a>
+<h1>Vim and Ctags</h1>
+<p>Recently I decided to start learning vim more as I have previously used Emacs but notice myself using mostly the terminal and using vim on the terminal is much faster and convenient for small text editing. I found this <a href="https://www.youtube.com/watch?v=XA2WjJbmmoM">great speech from 2016</a>, where I learned about ctags. What ctags does is it creates tags so you can quickly jump to other instances of a certain word AND it also provides autocompletion. Here I will show basic steps to get it working.</p>
+<p>First install ctags from your package manager and to make creating tags simple add a command to your vimrc by adding this line: <code>command! MakeTags !ctags -R . </code>. Now when you are editing a file and you are in the root directory of your project you can run the command MakeTags inside vim and it automatically creates tags for everything recursively.</p>
+<p>Now we can:</p>                                                              
+<ul>                                                                            
+    <li>Use ^] to jump to tag under cursor</li>                                   
+    <li>Use ^] for ambigious tags</li>                                            
+    <li>Use ^t to jump back up the tag stack</li>                                 
+    <li>Use ^x^n to autocomplete from just that file</li>                         
+    <li>Use ^x^f to autocomplete for filenames(if path is correct)</li>           
+    <li>Use ^x^] to autocomplete for tags only</li>                               
+    <li>Use ^n to autocomplete for anything specified by the 'complete' option</li>
+    <li>Use ^n and ^p to go back and forth inside the suggestions list</li>       
+ </ul>                                                                           
+                                                                                 
+ <p>That's the most of it for ctags. For more configurations unrelated to ctags I recommend <a href="https://www.youtube.com/watch?v=Gs1VDYnS-Ac">this speech from Leeren</a>.</p>
+<footer>by <strong><a href='https://miikanissi.com/'>Miika Nissi</a></strong></footer>
+</body>
+
+</html>

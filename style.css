@@ -1,3 +1,6 @@
+/* css file for miikanissi.com by Miika Nissi */
+
+/* define color variables */
 :root 
 {
 	--color0: #1d2021;
@@ -6,11 +9,77 @@
 	--color3: #FAE97A;
 	--color4: #A17AFA;
 	--color5: #AF9FD6;
+	--color6: #3c3c3c;
+	--color7: #ffe700;
+  --color8: #353A3c;
 }
 
-li img
+/* navigation bar */
+nav li
 {
-	height: 1.25em;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  min-width: 25%;
+}
+
+nav a
+{
+  background: var(--color6);
+  color: var(--color4);
+  display: block;
+  font: bold 16px/50px sans-serif;
+  padding: 0 25px;
+  text-align: center;
+  text-decoration: none;
+}
+
+nav ul
+{
+  background: var(--color6);
+  font-size: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+}
+
+nav .dropdown:after {
+    content: ' \25bc';
+}
+
+nav li:hover a
+{
+  background: var(--color8);
+}
+
+nav li ul
+{
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 35px;
+  visibility: hidden;
+  z-index: 1;
+}
+
+nav li:hover ul
+{
+  opacity: 1;
+  top: 50px;
+  visibility: visible;
+}
+
+nav li ul li
+{
+  width: 100%;
+}
+
+nav li ul a:hover
+{
+  background: var(--color8);
 }
 
 h1
@@ -76,30 +145,15 @@ a:hover img
 	transform: scale(2, 2);
 }
 
-#link
+pre, code
 {
-	display: inline;
+	background: var(--color6);
+	border: 0;
+	color: var(--color3);
+  display: inline-block;
 }
-
-#links
-{
-	font-size: large;
-	text-align: center;
-	margin: auto;
-	max-width: 700px;
-	background-color: var(--color0);
-	padding: 5px;
-	border-radius: 10px;
-}
-
-#links img
-{
-	height: 1.25em;
-}
-
 code
 {
-	color: var(--color2);
 	overflow-x: auto;
 }
 
@@ -113,16 +167,34 @@ code
 {
 	padding-top: 1em;
 	float: right;
-	max-width: 400px;
+	max-width: 88%;
 	max-height: 225px;
-	padding: 20px;
+	padding: 20px;  
 }
 .odd img
 {
 	padding-top: 1em;
 	float: left;
-	max-width: 400px;
+	max-width: 88%;
 	max-height: 225px;
 	padding: 20px;
 }
 
+footer
+{
+	clear:both;
+	text-align: center;
+	padding-top: 2em;
+  font-size: large;
+}
+footer strong
+{
+	font-weight:bold;
+}
+.img_center
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Importing pictures from iPhone to Linux PC</title>
+<link rel='stylesheet' type='text/css' href='../style.css'/>
+<meta charset='utf-8'/>
+<meta name='description' content='This website is for Miika Nissi'/>
+<meta name='viewport' content='width=device-width, initial-scale=1'/>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'/>
+<meta name='keywords' content='resume, CV, Miika Nissi, blog, blogpage'/>
+<meta name='author' content='Miika Nissi'/>
+<link rel='icon' type='image/png' href='images/favicon.png'/>
+</head>
+<body>
+<a href='https://miikanissi.com/blogindex'>Back</a>
+<h1>Importing pictures from iPhone to Linux PC</h1>
+<p>You'd think moving pictures from a so called "smart phone" to your computer would be a simple task in 2020, but that's not how Apple works.</p>
+<p>My first problem was getting access to iPhone's storage. After connecting it to my Linux pc I could only access the Documents folder. DCIM folder would fail to mount. After a bit of research I found out you need to install a package called <b>ifuse</b> to be able to mount iPhones, easiest way to do this with ifuse I found out to be mounting it directly in your home directory. The command for this is <code>ifuse ~/mountlocation</code>.</p>
+<p>Now that the iPhone is succesfully mounted you can go ahead and copy the images to your drive. After you're done with this you might realize most of your files have an extension .HEIC and most image viewers don't really support this format. This is another great idea Apple had to get rid of .JPEGs and use an obscure file format instead. Now if you want your pictures as classic .JPGs you need to convert them. The best way for this in my opinion is using <b>ImageMagick</b>. I made a small script to make this process very simple, just install imagemagick and run this bash script: </p>
+<pre><code>#!/bin/sh
+
+DIR=$1
+for file in $DIR/*.HEIC;
+    do
+        convert "${file}" -set filename:t '%d/%t-converted' '%[filename:t].jpg'
+    done
+</code></pre>
+<p>You give this script the directory where your pictures are located and itconverts every .HEIC file into a .jpg. </p>
+<footer>by <strong><a href='https://miikanissi.com/'>Miika Nissi</a></strong></footer>
+</body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>How to set up a personal GIT Server</title>
+<link rel='stylesheet' type='text/css' href='../style.css'>
+<meta charset='utf-8'/>
+<meta name='description' content='This website is for Miika Nissi'>
+<meta name='viewport' content='width=device-width, initial-scale=1'/>
+<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+<meta name='keywords' content='resume, CV, Miika Nissi, blog, blogpage'>
+<meta name='author' content='Miika Nissi'>
+</head>
+<body>
+<a href='https://miikanissi.com/blogindex'>Back</a>
+<h1>How to set up a personal GIT Server</h1>
+<p>I thought I could use my blog to give simple How-To tutorials whenever I figure out something useful that doesn't have too many resources available online. </p><p>In this blog I will explain how you can set up your own personal git server that can run on any VPS. I will also show how you can push changes to multiple repositories so you can easily have your code on GitHub and your own server without any extra effort.</p>
+<p>Firstly the requirements. You need a VPS or a local server that has git and ssh enabled.</p>
+<p>To start login to your server as root and create a <code>git</code> user and a <code>.ssh</code> directory for that user.</p>
+<pre><code>$ sudo adduser git 
+$ su git 
+$ cd 
+$ mkdir .ssh && chmod 700 .ssh 
+$ touch .ssh/authorized_keys && chmod 600 .ssh/authorized_keys</code></pre>
+<p>Now you need to add your public ssh key from your local machine to git users <code>.ssh/authorized_keys</code> file.</p>
+<p>This depends on your machine but commonly on linux systems your public key can be found at <code>/user/home/.ssh/id_rsa.pub</code>. Copy the contents of the file in it's entirity to your servers <code>authorized_keys</code> file that we just created.</p>
+<p>You should be able to login to your server now as a git user from your local machine using <code>ssh git@youraddress</code></p>
+<p>Now you can create a git directory on your server on any location you prefer, but I like to have mine at <code>/var/www/git/</code>.</p>
+<pre><code>$ cd 
+$ sudo mkdir /var/www/git/ 
+$ sudo chown git:git /var/www/git/</pre></code>
+<p>We have now created the git folder and we can start creating our repositories. To do that all we have to do is make a new directory inside the git folder as a git user and initialize a bare git repository there.</p>
+<pre><code>$ cd /var/www/git/ 
+$ mkdir repository.git 
+$ cd repository.git 
+$ git init --bare </code></pre>
+<p>Now we have done everything we need on the server side. To push changes to this repository in your server you have to add a new 'pushurl' for your git direcotry on your machine.</p><p>On your local machine go to your git repository and run this: </p>
+<pre><code>$ git remote set-url --pushurl -add origin "git@youraddress:/var/www/git/repository.git 
+$ git push --all</pre></code>
+<p>Your repository should now have been pushed to your personal Git server. If you still want your commits to push to GitHub or GitLab as well all you have to do is run the previous command with the GitHub address as well. That should allow you to push to as many repositories as you want whenever you run a push command.</p>
+<p>To add more repositories just follow the same process of making a new directory inside the git folder and initializing it with a bare repository, then adding a new pushurl to your repository and pushing all changes there.</p>
+<p>You should now have a fully working personal Git server. In part 2 I will show how to have a nice public interface for your Git repositories on your website, I just have to figure it out first myself.</p>
+<footer>by <strong><a href='https://miikanissi.com/'>Miika Nissi</a></strong></footer>
+</body>
+
+</html>
